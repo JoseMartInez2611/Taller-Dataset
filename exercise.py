@@ -64,13 +64,13 @@ def imput_values(df):
     df = df.copy()
     
     # edad → mediana
-    df["edad"].fillna(df["edad"].median(), inplace=True)
+    df["edad"] = df["edad"].fillna(df["edad"].median())
     
     # ingreso → media
-    df["ingreso"].fillna(df["ingreso"].mean(), inplace=True)
+    df["ingreso"] = df["ingreso"].fillna(df["ingreso"].mean())
     
     # genero → moda
-    df["genero"].fillna(df["genero"].mode()[0], inplace=True)
+    df["genero"] = df["genero"].fillna(df["genero"].mode()[0])
     
     return df
 
@@ -90,12 +90,12 @@ def delete_outliers(df):
 
 
 # 3. Eliminar duplicados
-def delete_duplicados(df):
+def delete_duplicates(df):
     return df.drop_duplicates().copy()
 
 
 # 4. Convertir compra a binaria
-def convertir_compra_binaria(df):
+def convert_binary_buy(df):
     df = df.copy()
     
     df["comprar"] = df["comprar"].map({
@@ -117,7 +117,7 @@ def scalar_variables(df):
 
 
 # 6. Separar X e y
-def separar_xy(df):
+def separate_xy(df):
     X = df.drop("comprar", axis=1)
     y = df["comprar"]
     
