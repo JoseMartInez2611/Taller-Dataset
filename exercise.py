@@ -1,3 +1,7 @@
+from datetime import datetime
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+
 """
 Ejercicio #1
 
@@ -188,7 +192,7 @@ def mostrar_valores_únicos(df):
 
 
 """
-Ejercio #4
+Ejercicio #4
 
 data = {
     "edad": [20, 25, None, 30, 35, 40, None],
@@ -204,4 +208,32 @@ data = {
 ● Normalizar salario
 """ 
 
+# 1. Imputar valores faltantes correctamente según tipo
+def imputar_valores_faltantes(df):
+    # edad → mediana
+    df["edad"] = df["edad"].fillna(df["edad"].median())
+    
+    # salario → media
+    df["salario"] = df["salario"].fillna(df["salario"].mean())
+    
+    # departamento → moda
+    df["departamento"] = df["departamento"].fillna(df["departamento"].mode()[0])
 
+
+# 2. Codificar rendimiento (ordinal: bajo < medio < alto)
+def codificar_rendimiento(df):
+    df["rendimiento"] = df["rendimiento"].map({
+        "bajo": 0,
+        "medio": 1,
+        "alto": 2
+    })
+
+
+# 3. One-hot encoding en departamento
+def one_hot_encoding_departamento(df):
+    return pd.get_dummies(df, columns=["departamento"], prefix="dept")
+
+# 4. Normalizar salario
+def normalizar_salario(df):
+    scaler = StandardScaler()
+    df["salario"] = scaler.fit_transform(df[["salario"]])
