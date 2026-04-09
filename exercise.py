@@ -1,8 +1,3 @@
-import pandas as pd
-from datetime import datetime
-import numpy as np
-from sklearn.preprocessing import StandardScaler
-
 """
 Ejercicio #1
 
@@ -151,23 +146,45 @@ def ejercicio2():
 """
 Ejercicio #3
 
-data{
+data = {
     "ciudad":["bogota", "Bogotá", "BOGOTA", "medellin", "Medellín"],
-    "genero:"["M", "Masculino", "F", "Femenino", "f"],
+    "genero":["M", "Masculino", "F", "Femenino", "f"],
     "edad":[25, 30, 22, 28, 35]
 }
 
-● Normalizar texto (minúsculas, quitar tildes )
+● Normalizar texto (minúsculas, quitar tildes)
 ● Unificar categorías:
     ○ bogota → Bogotá
     ○ masculino/M → M
     ○ femenino/F → F
 ● Validar que no existan categorías duplicadas
 ● Mostrar valores únicos finales
-
 """
 
+# 1. Normalizar texto (minúsculas, quitar tildes )
+def normalizar_texto(df):
+    df["ciudad"] = df["ciudad"].str.lower().str.normalize("NFKD").str.encode("ascii", errors="ignore").str.decode("utf-8")
+    
+    # Normalizar genero
+    df["genero"] = df["genero"].str.lower().str.normalize("NFKD").str.encode("ascii", errors="ignore").str.decode("utf-8")
+    
 
+# 2. Unificar categorías
+def unificar_categorías(df):
+    df["ciudad"] = df["ciudad"].replace("bogota", "Bogotá").replace("medellin", "Medellín")
+    df["genero"] = df["genero"].replace("masculino", "M").replace("femenino", "F").replace("m", "M").replace("f", "F")
+    return df
+
+
+# 3. Validar que no existan categorías duplicadas
+def validar_categorías_duplicadas(df):
+    print(df["ciudad"].value_counts())
+    print(df["genero"].value_counts())
+
+# 4. Mostrar valores únicos finales
+def mostrar_valores_únicos(df):
+    print("Ciudades únicas finales:\n",df["ciudad"])
+    print("Géneros únicos finales:\n",df["genero"])
 
 
 """
@@ -185,8 +202,6 @@ data = {
     ○ rendimiento (ordinal: bajo < medio < alto)
 ● One-hot encoding en departamento
 ● Normalizar salario
-
-
-"""
+""" 
 
 

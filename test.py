@@ -2,6 +2,7 @@ import exercise
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
+from datetime import datetime
 
 #Ejercicio #1:
 def test_first_point():
@@ -30,7 +31,7 @@ def test_first_point():
         "Variable y:\n" + str(y) + "\n"
     )
 
-from datetime import datetime
+
 
 def ejercicio2():
     # Dataset
@@ -65,9 +66,32 @@ def ejercicio2():
     
     return df_result
 
+  def ejercicio_3():
+      data = {
+          "ciudad":["bogota", "Bogotá", "BOGOTA", "medellin", "Medellín"],
+          "genero": ["M", "Masculino", "F", "Femenino", "f"],
+          "edad":[25, 30, 22, 28, 35]
+      }   
+
+      df = pd.DataFrame(data)
+      normalizar_texto(df)
+      unificar_categorías(df)
+      validar_categorías_duplicadas(df)
+      mostrar_valores_únicos(df)
+
+
+  ejercicio_3()
+
 
 def main():
+  
+    print("Ejercicio #1")
     test_first_point();
+    print("Ejercicio #1")
+    ejercicio_2():
+    print("Ejercicio #1")
+    ejercicio_3():
 
 
 main()
+
