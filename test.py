@@ -2,6 +2,8 @@ import exercise
 import pandas as pd
 import numpy as np
 from datetime import datetime
+from sklearn.preprocessing import StandardScaler
+
 
 #Ejercicio #1:
 def test_first_point():
@@ -41,6 +43,7 @@ def ejercicio2():
     }
 
     df = pd.DataFrame(data)
+    print("\nDataFrame original:\n" + str(df) + "\n")
     df['fecha_nacimiento'] = pd.to_datetime(df['fecha_nacimiento'])
 
     current_year = datetime.now().year
@@ -73,19 +76,37 @@ def ejercicio_3():
     }   
 
     df = pd.DataFrame(data)
+    print("\nDataFrame original:\n" + str(df) + "\n")
     exercise.normalizar_texto(df)
     exercise.unificar_categorías(df)
     exercise.validar_categorías_duplicadas(df)
     exercise.mostrar_valores_únicos(df)
 
+def ejercicio_4():
+    data = {
+        "edad": [20, 25, None, 30, 35, 40, None],
+        "salario": [1000, 2000, 3000, None, 5000, 6000, 7000],
+        "departamento": ["ventas", "ventas", "IT", "IT", None, "HR", "HR"],
+        "rendimiento": ["alto", "medio", "alto", "bajo", "medio", "alto", "bajo"]
+    }
+
+    df = pd.DataFrame(data)
+    print("\nDataFrame original:\n" + str(df) + "\n")
+    exercise.imputar_valores_faltantes(df)
+    exercise.codificar_rendimiento(df)
+    df = exercise.one_hot_encoding_departamento(df)
+    exercise.normalizar_salario(df)
+    print("\nDataFrame procesado:\n" + str(df) + "\n")
 
 def main():
-    print("Ejercicio #1")
+    print("================================Ejercicio #1================================")
     test_first_point()
-    print("Ejercicio #2")
+    print("================================Ejercicio #2================================")
     ejercicio2()
-    print("Ejercicio #3")
+    print("================================Ejercicio #3================================")
     ejercicio_3()
+    print("================================Ejercicio #4================================")
+    ejercicio_4()
 
 
 main()
